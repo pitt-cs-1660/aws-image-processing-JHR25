@@ -10,13 +10,12 @@ COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 ############
 WORKDIR /var/task
 
-COPY pyproject.toml ./
-RUN uv sync
+COPY pyproject.toml .
 
-COPY handler.py ./
+RUN uv sync --no-cache
 
-ENV PYTHONUNBUFFERED=1 \
-    PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONPATH=/var/task/.venv/lib/python3.13/site-packages:/var/task
+COPY handler.py .
+
+ENV PYTHONPATH=/var/task
 
 CMD ["handler.exif_handler"]
