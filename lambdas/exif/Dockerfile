@@ -12,7 +12,7 @@ WORKDIR /var/task
 
 COPY pyproject.toml .
 
-RUN uv sync --no-cache
+RUN uv sync
 
 COPY handler.py .
 
